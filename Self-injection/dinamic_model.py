@@ -9,12 +9,14 @@ I = 1400/3.1415
 k1 = 75
 k2 = 75
 gN = 75
-alf = complex(1, 2.5)
+alf = 0
 ksi0 = -8
-v_m = 3.1415/2000
+ksi1 = 8
+v_m = np.pi/200
+t_max = (ksi1-ksi0)/v_m
 k3 = 75
 T = 0.04
-ex = cmath.exp(complex(0, 3 * 3.1415/4 + 0.6))
+ex = cmath.exp(3j * np.pi/4))
 b = 0.05
 nu = 0.5
 w_m = 13000000000
@@ -22,13 +24,12 @@ km = 13
 
 def func(t, y):
     y1 = I - k1 * y[0] - y[0] * gN * abs(y[1]) ** 2
-    y2 = (alf * y[0] * gN - k2 + complex(0, ksi0 - v_m * t)) * y[1] - 2 * k3 * T * ex * y[3]
-    y3 = -y[2] + complex(0, b) * y[3] - 2 * nu * (1 / T) * ex * y[1]
+    y2 = ((1 + 1j * alf) * y[0] * gN - k2 + 1j * (ksi0 + v_m * t)) * y[1] - 2 * k3 * T * ex * y[3]
+    y3 = -y[2] + complex(0, b) * y[3] - 2 * nu  / T * ex * y[1]
     y4 = -y[3] + complex(0, b) * y[2]
     return np.array([y1, y2, y3, y4])
 
-sol = solve_ivp(func, [0, 5], [1.6 * 10 ** (-27), complex(1, 0), complex(1, 0), complex(1, 0)])
-
+sol = solve_ivp(func, [0, t_max], [1, complex(1, 0), complex(1e-4, 0), complex(1e-4, 0)])
 
 
 ampl = sol.y[1]
