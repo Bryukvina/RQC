@@ -26,8 +26,10 @@ count = 0
 for i in range(1, len(channel2) - 1):
     if channel2[i - 1] < channel2[i] and channel2[i + 1] < channel2[i]:
         count += 1
-speed = (max(channel2) - min(channel2)) / ((max(times) - min(times)) / (2 * count))
-freq = times / speed
+#constant dw = ....
+
+dt = (max(times) - min(times)) / count
+freq = dw / dt
 
 #draw grafix with fitting data. parameters were had already piked up
 
