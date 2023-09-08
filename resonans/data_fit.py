@@ -53,7 +53,7 @@ g = 4.9 * 10000000000
 
 #draw grafix with fitting data. parameters were had already piked up (part of data with resonanse)
 
-theor_list = theor(freq, d0, dc, g)
+theor_list = theor(freq, do, dc, g)
 freq_prac = freq + 0.85 * 10 ** (11)
 prac_norm = (channel3 - min(channel3)) /(8.4099E-01 - min(channel3))
 
